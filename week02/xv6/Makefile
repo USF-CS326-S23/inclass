@@ -128,6 +128,7 @@ UPROGS=\
 	$U/_init\
 	$U/_kill\
 	$U/_listtest\
+	$U/_listtesthm\
 	$U/_ln\
 	$U/_ls\
 	$U/_mkdir\
