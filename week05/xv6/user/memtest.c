@@ -74,6 +74,18 @@ mem_check(struct memptrs_st memptrs[], int count, long size)
   return valid;
 }
 
+void
+mem_init_ptrs(struct memptrs_st memptrs[], int count)
+{
+  int i;
+
+  for(i = 0; i < count; i++){
+    memptrs[i].ptr = 0;
+    memptrs[i].size = 0;
+    memptrs[i].used = 0;
+  }
+}
+
 /*
  * memrefs - a mini langauge to describe memory requests
  *
@@ -94,11 +106,10 @@ mem_refs(int argc, char **argv)
   char *name;
   struct memptrs_st memptrs[MAX_PTRS];
 
-  debug_print("argc = %d\n", argc); 
+  mem_init_ptrs(memptrs, MAX_PTRS);
 
   while(i < argc){
     if(strcmp(argv[i], "m") == 0){
-      debug_print("argv[%d] = %s\n", i, argv[i]); 
       /* (m)alloc */
       if((argc - i) < 4){
         fprintf(2, "mem_refs() - Not enough arguments for (m)alloc\n");
@@ -122,12 +133,12 @@ mem_refs(int argc, char **argv)
       }
       index = atoi(argv[i + 1]);
       size = memptrs[index].size;
+      debug_print("cmd = %s, index = %d\n",
+                  argv[i], index);
       mem_scribble(memptrs[index].ptr, size, 0x55);
       memptrs[index].used = 0;
       myfree(memptrs[index].ptr);
       i += 2;
-      debug_print("cmd = %s, index = %d\n",
-                  argv[i], index);
     }else if(strcmp(argv[i], "p") == 0){
       /* (p)rint */
       malloc_print();
@@ -143,7 +154,7 @@ mem_refs(int argc, char **argv)
         exit(-1);
       }
       size = atoi(argv[i + 1]);
-      mem_check(memptrs, index, size);
+      mem_check(memptrs, MAX_PTRS, size);
       i += 2;
     }else{
       fprintf(2, "memrefs() - command %s not recognized\n",
@@ -161,7 +172,6 @@ main(int argc, char *argv[])
     exit(-1);
   }
 
-  debug_print("argc = %d\n", argc);
   mem_refs(argc, argv);
 
   exit(0);
