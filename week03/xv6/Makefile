@@ -117,28 +117,23 @@ mkfs/mkfs: mkfs/mkfs.c $K/fs.h $K/param.h
 .PRECIOUS: %.o
 
 UPROGS=\
-	$U/_array\
 	$U/_cat\
-	$U/_countc\
 	$U/_echo\
 	$U/_forktest\
 	$U/_grep\
-	$U/_head\
-	$U/_hello\
-	$U/_helloarg\
+	$U/_heap\
 	$U/_init\
 	$U/_kill\
 	$U/_listtest\
 	$U/_listtesthm\
 	$U/_ln\
 	$U/_ls\
+	$U/_mem\
 	$U/_mkdir\
-	$U/_ptr\
 	$U/_rm\
-	$U/_sizes\
 	$U/_sh\
+	$U/_stderr\
 	$U/_stressfs\
-	$U/_sumargs\
 	$U/_usertests\
 	$U/_grind\
 	$U/_wc\
