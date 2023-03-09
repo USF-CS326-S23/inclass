@@ -30,7 +30,6 @@ main(int argc, char *argv[])
 
     newargv[0] = "wc";
     newargv[1] = 0;
-    printf("Before exec()\n");
     r = exec("wc", newargv);
     // NOT REACHED ON SUCCESS
     fprintf(2, "exec() failed: %d\n", r);
