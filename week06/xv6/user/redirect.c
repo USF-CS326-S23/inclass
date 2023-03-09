@@ -1,4 +1,4 @@
-// Redirect the output of ls to a file
+// Redirect the output of ls command to a file
 
 #include "kernel/fcntl.h"
 #include "kernel/types.h"

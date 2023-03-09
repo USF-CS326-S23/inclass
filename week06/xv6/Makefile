@@ -121,7 +121,11 @@ UPROGS=\
 	$U/_echo\
 	$U/_fdtest\
 	$U/_fork\
+	$U/_fork2\
+	$U/_fork3\
 	$U/_forkexec\
+	$U/_forkexec2\
+	$U/_forkwait\
 	$U/_forktest\
 	$U/_grep\
 	$U/_heapstart\
@@ -133,6 +137,8 @@ UPROGS=\
 	$U/_memtest\
 	$U/_mkdir\
 	$U/_pipe\
+	$U/_pipe2\
+	$U/_pipe_block\
 	$U/_ptr\
 	$U/_redirect\
 	$U/_redirect2\

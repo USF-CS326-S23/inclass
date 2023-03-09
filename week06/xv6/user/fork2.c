@@ -1,5 +1,4 @@
-// Example of using fork() and showing a new address space
-// is created.
+// Example of fork() then an exec() with parent code outside the if()
 
 #include "kernel/fcntl.h"
 #include "kernel/types.h"
@@ -27,17 +26,17 @@ main(int argc, char *argv[])
     printf("Child: x = %d\n", x);
     printf("Child: &x = %p\n", &x);
     exit(77);
-  }else{
-    // we are in the parent
-    printf("Parent: id = %d\n", id);
-    printf("Parent: getpid() = %d\n", getpid());
-    printf("Parent: wait() for the child to exit\n");
-    wid = wait(&exitcode);
-    printf("Parent: wait() return id = %d\n", wid);
-    printf("Parent: exitcode = %d\n", exitcode);
-    printf("Parent: x = %d\n", x);
-    printf("Patent: &x = %p\n", &x);
   }
+
+  // we are in the parent
+  printf("Parent: id = %d\n", id);
+  printf("Parent: getpid() = %d\n", getpid());
+  printf("Parent: wait() for the child to exit\n");
+  wid = wait(&exitcode);
+  printf("Parent: wait() return id = %d\n", wid);
+  printf("Parent: exitcode = %d\n", exitcode);
+  printf("Parent: x = %d\n", x);
+  printf("Patent: &x = %p\n", &x);
 
   exit(0);
 }

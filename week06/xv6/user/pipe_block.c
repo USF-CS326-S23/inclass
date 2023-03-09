@@ -1,4 +1,6 @@
-// Create a pipe and send data from child to parent via the pipe
+// Create a pipe and send data from child to parent via pipe
+// This shows how parent will block if the write end of the pipe
+// is not closed.
 
 #include "kernel/fcntl.h"
 #include "kernel/types.h"
@@ -25,11 +27,21 @@ main(int argc, char *argv[])
     exit(0);
   }else{
     // parent will read from pipe
-    close(pfds[1]);
+    // close(pfds[1]);
+
     r = read(pfds[0], buf, 31);
-    close(pfds[0]);
     buf[r] = '\0';
     printf("From child: %s\n", buf);    
+
+    r = read(pfds[0], buf, 31);
+    if(r >= 0){
+      buf[r] = '\0';
+      printf("From child: %s\n", buf);
+    }else{
+      printf("read() = %d\n", r);
+    }
+    close(pfds[0]);
+
     wid = wait(&exitcode);
     printf("Parent: wait() return id = %d\n", wid);
     printf("Parent: exitcode = %d\n", exitcode);

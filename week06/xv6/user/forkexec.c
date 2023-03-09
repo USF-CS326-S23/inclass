@@ -1,3 +1,5 @@
+// Example of fork() then exec() in child.
+
 #include "kernel/fcntl.h"
 #include "kernel/types.h"
 #include "kernel/stat.h"
@@ -16,7 +18,7 @@ main(int argc, char *argv[])
     // we are in the child
     newargv[0] = "ls";
     newargv[1] = 0;
-    r = exec("ls", newargv);
+    r = exec(newargv[0], newargv);
     // NOT REACHED ON SUCCESS
     fprintf(2, "exec() failed: %d\n", r);
     exit(-1);

@@ -1,2 +1,2 @@
-# lab02-starter
-Project02 Starter Code
+# Week06 
+Week06 In-class examples

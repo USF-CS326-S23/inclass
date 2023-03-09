@@ -8,7 +8,7 @@
 int
 main(int argc, char *argv[])
 {
-  int id, wid, exitcode;
+  int id;
   int r;
   char buf[32];
   int pfds[2];
@@ -23,17 +23,25 @@ main(int argc, char *argv[])
     write(pfds[1], "Hello", 5);
     close(pfds[1]);
     exit(0);
-  }else{
-    // parent will read from pipe
-    close(pfds[1]);
-    r = read(pfds[0], buf, 31);
-    close(pfds[0]);
-    buf[r] = '\0';
-    printf("From child: %s\n", buf);    
-    wid = wait(&exitcode);
-    printf("Parent: wait() return id = %d\n", wid);
-    printf("Parent: exitcode = %d\n", exitcode);
   }
 
-  exit(0);
+  id = fork();
+
+  if(id == 0){
+    close(pfds[1]);
+    r = read(pfds[0], buf, 31);
+    buf[r] = '\0';
+    printf("From child: %s\n", buf);    
+    close(pfds[0]);
+    exit(0);
+  }
+
+  // Close both ends of pipe in parent
+  close(pfds[0]);
+  close(pfds[1]);
+
+  wait(0);
+  wait(0);
+
+  return 0;
 }
