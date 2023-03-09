@@ -1,6 +1,8 @@
 # Week06 
 Week06 In-class examples
 
+Here are the example programs added to the user directory
+
 ```fork.c```
 - Basic fork()/wait() example showing address space is copied
 
