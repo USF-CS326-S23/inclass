@@ -140,6 +140,7 @@ UPROGS=\
 	$U/_pipe2\
 	$U/_pipe_block\
 	$U/_pipe_redirect\
+	$U/_pipesend\
 	$U/_ptr\
 	$U/_redirect\
 	$U/_redirect2\

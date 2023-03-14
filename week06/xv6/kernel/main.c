@@ -15,6 +15,7 @@ main()
     printfinit();
     printf("\n");
     printf("xv6 kernel is booting\n");
+    printf("This is Greg's xv6!\n");
     printf("\n");
     kinit();         // physical page allocator
     kvminit();       // create kernel page table
